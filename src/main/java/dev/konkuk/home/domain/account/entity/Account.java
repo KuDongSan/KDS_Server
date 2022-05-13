@@ -35,7 +35,7 @@ public class Account extends BaseTimeEntity {
             name = "account_properties",
             joinColumns = @JoinColumn(name = "account_id")
     )
-    private List<Integer> properties = new ArrayList<>();
+    private List<Long> properties = new ArrayList<>();
 
     @Builder
     public Account(String name, String email, String imageThumbnail) {

@@ -2,13 +2,14 @@ package dev.konkuk.home.domain.account.api;
 
 import dev.konkuk.home.domain.account.dto.AccountDto;
 import dev.konkuk.home.domain.account.service.AccountService;
+import dev.konkuk.home.domain.property.dto.PropertyDto;
+import dev.konkuk.home.domain.property.dto.PropertySimpleDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/api")
+import java.util.List;
+
+@RequestMapping("/api/user")
 @RequiredArgsConstructor
 @RestController
 public class AccountController {
@@ -22,5 +23,7 @@ public class AccountController {
         }
         return accountService.getAccountDto(accountDto.getEmail());
     }
+
+
 
 }

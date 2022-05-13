@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface PropertyRepository extends JpaRepository<Property, Long> {
+public interface PropertyRepository extends JpaRepository<Property, Long>, CustomPropertyRepository{
 
     List<Property> findByAddress_Address2(String addr);
 }
