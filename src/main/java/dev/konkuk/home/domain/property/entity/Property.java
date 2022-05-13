@@ -5,9 +5,10 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Getter @Setter
-@ToString
+
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "Property")
 @Entity
 public class Property {
 
@@ -44,6 +45,8 @@ public class Property {
     private String agentPhone;
 
     private Double manageCost;
+
+
 
     @Embedded
     @AttributeOverrides({
