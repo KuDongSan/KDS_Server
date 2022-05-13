@@ -1,5 +1,6 @@
 package dev.konkuk.home.domain.account.entity;
 
+<<<<<<< HEAD
 import dev.konkuk.home.domain.property.entity.Property;
 import lombok.*;
 
@@ -14,6 +15,20 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Account {
+=======
+import dev.konkuk.home.domain.base.BaseTimeEntity;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
+public class Account extends BaseTimeEntity {
+>>>>>>> 26bf5f8feaa060760f68b32e77b6bb71d8092ee6
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +42,7 @@ public class Account {
 
     private String imageThumbnail;
 
+<<<<<<< HEAD
     @ElementCollection
     @CollectionTable(
             name = "account_properties",
@@ -34,6 +50,8 @@ public class Account {
     )
     private List<Integer> properties = new ArrayList<>();
 
+=======
+>>>>>>> 26bf5f8feaa060760f68b32e77b6bb71d8092ee6
     @Builder
     public Account(String name, String email, String imageThumbnail) {
         this.name = name;
