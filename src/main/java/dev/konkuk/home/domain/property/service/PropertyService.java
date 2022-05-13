@@ -21,7 +21,9 @@ import java.util.stream.Collectors;
 public class PropertyService {
 
     private final PropertyRepository propertyRepository;
+    //TODO 위치 변경
     private final AccountRepository accountRepository;
+
 
     public PropertyDto getProperty(Long propertyId) {
         Property property = propertyRepository.getById(propertyId);

@@ -18,4 +18,8 @@ public class Address {
 
     private String address3;
 
+    public String getFullAddress() {
+        return String.format("%s %s %s", this.address1, this.address2, this.address3);
+    }
+
 }

@@ -1,9 +1,7 @@
 package dev.konkuk.home.domain.property.api;
 
-import dev.konkuk.home.domain.account.dto.AccountDto;
 import dev.konkuk.home.domain.account.entity.Account;
 import dev.konkuk.home.domain.account.repository.AccountRepository;
-import dev.konkuk.home.domain.account.service.AccountService;
 import dev.konkuk.home.domain.property.dto.PropertyDto;
 import dev.konkuk.home.domain.property.dto.PropertySimpleDto;
 import dev.konkuk.home.domain.property.dto.SearchDto;
@@ -23,6 +21,13 @@ public class PropertyController {
     private final PropertyService propertyService;
     private final AccountRepository accountRepository;
 
+//    @GetMapping
+//    public ResponseEntity<List<PropertySimpleDto>> getPropertyList(
+//            @RequestParam("address") String address
+//    ) {
+//        List<PropertySimpleDto> propertySimpleDtos = propertyService.getPropertyList(address);
+//        return ResponseEntity.ok(propertySimpleDtos);
+//    }
 
     @GetMapping
     public ResponseEntity<List<PropertySimpleDto>> getPropertyList(
@@ -43,6 +48,7 @@ public class PropertyController {
     public ResponseEntity<List<PropertySimpleDto>> getFavorites(
             @RequestParam("email") String email
     ) {
+
         Optional<Account> byEmail = accountRepository.findByEmail(email);
         byEmail.get().getProperties().add(3L);
         byEmail.get().getProperties().add(4L);

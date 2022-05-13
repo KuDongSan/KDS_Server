@@ -9,7 +9,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Embedded;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,21 +23,31 @@ public class PropertySimpleDto {
 
     private String image_thumbnail;
 
+    private Integer deposit;
+
+    private Long monthlyRentPrice;
+
+    private Double manageCost;
+
     private Double area;
 
-    @Embedded
-    private Address address;
+    private String address;
 
     private List<Subway> subways = new ArrayList<>();
 
     @Builder
-    public PropertySimpleDto(Long itemId, SalesType salesType, ServiceType serviceType, String image_thumbnail, Double area, Address address, List<Subway> subways) {
+    public PropertySimpleDto(Long itemId, SalesType salesType, ServiceType serviceType,
+                             String image_thumbnail, Double area, Address address,
+                             Integer deposit, Long monthlyRentPrice, Double manageCost, List<Subway> subways) {
         this.itemId = itemId;
         this.salesType = salesType;
         this.serviceType = serviceType;
         this.image_thumbnail = image_thumbnail;
         this.area = area;
-        this.address = address;
+        this.address = address.getFullAddress();
+        this.deposit = deposit;
+        this.monthlyRentPrice = monthlyRentPrice;
+        this.manageCost = manageCost;
         this.subways = subways;
     }
 
@@ -60,6 +69,9 @@ public class PropertySimpleDto {
                 .image_thumbnail(property.getImage_thumbnail())
                 .area(property.getArea())
                 .address(property.getAddress())
+                .deposit(property.getDeposit())
+                .manageCost(property.getManageCost())
+                .monthlyRentPrice(property.getMonthlyRentPrice())
                 .subways(subways)
                 .build();
     }

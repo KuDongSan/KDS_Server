@@ -2,12 +2,8 @@ package dev.konkuk.home.domain.account.api;
 
 import dev.konkuk.home.domain.account.dto.AccountDto;
 import dev.konkuk.home.domain.account.service.AccountService;
-import dev.konkuk.home.domain.property.dto.PropertyDto;
-import dev.konkuk.home.domain.property.dto.PropertySimpleDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
