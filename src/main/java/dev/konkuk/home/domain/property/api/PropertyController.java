@@ -1,6 +1,7 @@
 package dev.konkuk.home.domain.property.api;
 
 import dev.konkuk.home.domain.property.dto.PropertyDto;
+import dev.konkuk.home.domain.property.dto.PropertySimpleDto;
 import dev.konkuk.home.domain.property.service.PropertyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +18,11 @@ public class PropertyController {
 
 
     @GetMapping
-    public ResponseEntity<List<PropertyDto>> getPropertyList(
+    public ResponseEntity<List<PropertySimpleDto>> getPropertyList(
             @RequestParam("address") String address
     ) {
-        List<PropertyDto> propertyDtos = propertyService.getPropertyList(address);
-        return ResponseEntity.ok(propertyDtos);
+        List<PropertySimpleDto> propertySimpleDtos = propertyService.getPropertyList(address);
+        return ResponseEntity.ok(propertySimpleDtos);
     }
 
     @GetMapping("/{propertyId}")

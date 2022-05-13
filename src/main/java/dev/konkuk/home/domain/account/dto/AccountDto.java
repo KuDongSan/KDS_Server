@@ -16,6 +16,7 @@ public class AccountDto {
     private String imageThumbnail;
 
     public Account toEntity() {
+
         return Account.builder()
                 .name(name)
                 .email(email)

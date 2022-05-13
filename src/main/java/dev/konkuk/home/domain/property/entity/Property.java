@@ -14,8 +14,6 @@ public class Property {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-
     private Long itemId;
 
     @Enumerated(EnumType.STRING)
@@ -47,35 +45,36 @@ public class Property {
     private Double manageCost;
 
 
-
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "name", column = @Column(name = "subway_name1")),
-            @AttributeOverride(name = "distance", column = @Column(name = "subway_distance1")),
+            @AttributeOverride(name = "description", column = @Column(name = "description1")),
+            @AttributeOverride(name = "distance", column = @Column(name = "subway_distance1"))
     })
     private Subway subway1;
 
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "name", column = @Column(name = "subway_name2")),
-            @AttributeOverride(name = "distance", column = @Column(name = "subway_distance2")),
+            @AttributeOverride(name = "description", column = @Column(name = "description2")),
+            @AttributeOverride(name = "distance", column = @Column(name = "subway_distance2"))
     })
     private Subway subway2;
 
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "name", column = @Column(name = "subway_name3")),
+            @AttributeOverride(name = "description", column = @Column(name = "description3")),
             @AttributeOverride(name = "distance", column = @Column(name = "subway_distance3")),
     })
     private Subway subway3;
 
     @Builder
     public Property(
-            Long id, SalesType salesType, ServiceType serviceType,String image_thumbnail,
+            SalesType salesType, ServiceType serviceType,String image_thumbnail,
             Integer deposit, Integer salePrice, Long monthlyRentPrice, Double area, Address address,
             Location location, String agentTitle, String agentPhone,
             Double manageCost) {
-        this.itemId = id;
         this.salesType = salesType;
         this.serviceType = serviceType;
         this.deposit = deposit;

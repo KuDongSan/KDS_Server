@@ -13,6 +13,8 @@ public class Subway {
 
     private String name;
 
+    private String description;
+
     private Integer distance;
 
 }

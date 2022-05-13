@@ -1,6 +1,7 @@
 package dev.konkuk.home.domain.property.service;
 
 import dev.konkuk.home.domain.property.dto.PropertyDto;
+import dev.konkuk.home.domain.property.dto.PropertySimpleDto;
 import dev.konkuk.home.domain.property.entity.Property;
 import dev.konkuk.home.domain.property.repository.PropertyRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,10 +23,10 @@ public class PropertyService {
         return PropertyDto.of(property);
     }
 
-    public List<PropertyDto> getPropertyList(String addr) {
+    public List<PropertySimpleDto> getPropertyList(String addr) {
         List<Property> properties = propertyRepository.findByAddress_Address2(addr);
 
         return properties.parallelStream().map(property ->
-                PropertyDto.of(property)).collect(Collectors.toList());
+                PropertySimpleDto.of(property)).collect(Collectors.toList());
     }
 }
