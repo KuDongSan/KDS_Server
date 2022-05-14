@@ -53,7 +53,6 @@ public class PropertyController {
         byEmail.get().getProperties().add(3L);
         byEmail.get().getProperties().add(4L);
 
-
         List<PropertySimpleDto> favoritePropertyList = propertyService.getFavoritePropertyList(email);
         return ResponseEntity.ok(favoritePropertyList);
 
