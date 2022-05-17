@@ -12,6 +12,8 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Address {
 
+    private String jibunAddress;
+
     private String address1;
 
     private String address2;
