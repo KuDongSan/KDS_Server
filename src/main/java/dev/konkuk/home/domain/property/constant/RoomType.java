@@ -7,14 +7,14 @@ import lombok.Setter;
 
 import javax.persistence.Embeddable;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Embeddable
-public class Location {
+public class RoomType {
 
-    private Double latitude;
+    private String roomTypeCode;
 
-    private Double longtitude;
+    private String roomType;
 }

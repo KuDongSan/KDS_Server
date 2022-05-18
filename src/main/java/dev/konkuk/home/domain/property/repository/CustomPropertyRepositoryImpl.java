@@ -44,6 +44,6 @@ public class CustomPropertyRepositoryImpl implements CustomPropertyRepository{
     }
 
     private BooleanExpression areaMoreThan(Double area) {
-        return QProperty.property.area.gt(area);
+        return QProperty.property.area.exclusiveArea.gt(area);
     }
 }

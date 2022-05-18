@@ -23,7 +23,7 @@ public class PropertySimpleDto {
 
     private String image_thumbnail;
 
-    private Integer deposit;
+    private Long deposit;
 
     private Long monthlyRentPrice;
 
@@ -38,7 +38,7 @@ public class PropertySimpleDto {
     @Builder
     public PropertySimpleDto(Long itemId, SalesType salesType, ServiceType serviceType,
                              String image_thumbnail, Double area, Address address,
-                             Integer deposit, Long monthlyRentPrice, Double manageCost, List<Subway> subways) {
+                             Long deposit, Long monthlyRentPrice, Double manageCost, List<Subway> subways) {
         this.itemId = itemId;
         this.salesType = salesType;
         this.serviceType = serviceType;
@@ -66,8 +66,8 @@ public class PropertySimpleDto {
                 .itemId(property.getItemId())
                 .salesType(property.getSalesType())
                 .serviceType(property.getServiceType())
-                .image_thumbnail(property.getImage_thumbnail())
-                .area(property.getArea())
+                .image_thumbnail(property.getImageThumbnail())
+                .area(property.getArea().getExclusiveArea())
                 .address(property.getAddress())
                 .deposit(property.getDeposit())
                 .manageCost(property.getManageCost())

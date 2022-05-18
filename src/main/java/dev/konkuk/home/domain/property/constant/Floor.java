@@ -5,16 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Embeddable;
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Embeddable
-public class Location {
+public class Floor {
 
-    private Double latitude;
+    private String floor;
 
-    private Double longtitude;
+    private String floorString;
+
+    private String floorAll;
+
 }
