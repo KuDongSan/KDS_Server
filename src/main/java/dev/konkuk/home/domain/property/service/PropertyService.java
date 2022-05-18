@@ -27,7 +27,7 @@ public class PropertyService {
 
     public PropertyDto getProperty(Long propertyId) {
         Property property = propertyRepository.getById(propertyId);
-        return PropertyDto.of(property);
+        return PropertyDto.of(property, false);
     }
 
     public List<PropertySimpleDto> getFavoritePropertyList(String email) {

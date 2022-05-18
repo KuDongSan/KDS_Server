@@ -6,15 +6,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Lob;
 
-@Getter
-@Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter @Setter
 @Embeddable
-public class Location {
+public class Popular {
 
-    private Double latitude;
+    private String  popularTitle;
 
-    private Double longtitude;
+    @Lob
+    private String  popularDescription;
+
+    private String  popularURL;
+
+
 }

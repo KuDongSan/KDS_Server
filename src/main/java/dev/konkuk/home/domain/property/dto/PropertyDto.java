@@ -4,6 +4,11 @@ import dev.konkuk.home.domain.property.constant.*;
 import dev.konkuk.home.domain.property.entity.Property;
 import lombok.*;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Setter
@@ -15,17 +20,53 @@ public class PropertyDto {
 
     private ServiceType serviceType;
 
-    private String image_thumbnail;
+    private List<String> images;
 
-    private Integer deposit;
+    private String imageThumbnail;
 
-    private Integer salePrice;
+    private Long deposit;
+
+    private Long salePrice;
 
     private Long monthlyRentPrice;
 
-    private Double area;
+    private Area area;
 
-    private Address address;
+    private String jibunAddress;
+
+    private String address;
+
+    private RoomType roomType;
+
+    private String title;
+
+    private String status;
+
+    private String description;
+
+    private String parking;
+
+    private String elevator;
+
+    private String roomDirection;
+
+    private String moveinDate;
+
+    private Floor floor;
+
+    private String options;
+
+    private String manageCostInc;
+
+    private Long bathroomCount;
+
+    private String residenceType;
+
+    private String manageCostNotInc;
+
+    private Popular popular;
+
+//    private Boolean popular;
 
     private Location location;
 
@@ -35,54 +76,100 @@ public class PropertyDto {
 
     private Double manageCost;
 
-    private Subway subway1;
+    private Boolean favorite;
 
-    private Subway subway2;
+    private LocalDateTime updateAt;
 
-    private Subway subway3;
+    private List<Subway> subways = new ArrayList<>();
 
     @Builder
-    public PropertyDto(Long itemId, SalesType salesType, ServiceType serviceType, String image_thumbnail,
-                       Integer deposit, Integer salePrice, Long monthlyRentPrice, Double area, Address address,
-                       Location location, String agentTitle, String agentPhone, Double manageCost,
-                       Subway subway1, Subway subway2, Subway subway3) {
+    public PropertyDto(Long itemId, SalesType salesType, ServiceType serviceType,List<String> images,  String imageThumbnail, Long deposit,
+                    Long salePrice, Long monthlyRentPrice, Area area, String jibunAddress, String address, RoomType roomType,
+                    String title, String status, String description, String parking, String elevator,
+                    String roomDirection, String moveinDate, Floor floor, String options, String manageCostInc,
+                    Long bathroomCount, String residenceType, String manageCostNotInc, Popular popular, Location location,
+                    String agentTitle, String agentPhone, Double manageCost,Boolean favorite, LocalDateTime updateAt, List<Subway> subways) {
         this.itemId = itemId;
         this.salesType = salesType;
         this.serviceType = serviceType;
-        this.image_thumbnail = image_thumbnail;
+        this.images = images;
+        this.imageThumbnail = imageThumbnail;
         this.deposit = deposit;
         this.salePrice = salePrice;
         this.monthlyRentPrice = monthlyRentPrice;
         this.area = area;
+        this.jibunAddress = jibunAddress;
         this.address = address;
+        this.roomType = roomType;
+        this.title = title;
+        this.status = status;
+        this.description = description;
+        this.parking = parking;
+        this.elevator = elevator;
+        this.roomDirection = roomDirection;
+        this.moveinDate = moveinDate;
+        this.floor = floor;
+        this.options = options;
+        this.manageCostInc = manageCostInc;
+        this.bathroomCount = bathroomCount;
+        this.residenceType = residenceType;
+        this.manageCostNotInc = manageCostNotInc;
+        this.popular = popular;
         this.location = location;
         this.agentTitle = agentTitle;
         this.agentPhone = agentPhone;
         this.manageCost = manageCost;
-        this.subway1 = subway1;
-        this.subway2 = subway2;
-        this.subway3 = subway3;
+        this.favorite = favorite;
+        this.updateAt = updateAt;
+        this.subways = subways;
+
     }
 
-    public static PropertyDto of(Property property) {
+    public static PropertyDto of(Property property, Boolean favorite) {
+
+        List<Subway> subways = new ArrayList<>();
+
+        subways.add(property.getSubway1());
+        subways.add(property.getSubway2());
+
+        if (property.getSubway3() != null) {
+            subways.add(property.getSubway3());
+        }
 
         return PropertyDto.builder()
                 .itemId(property.getItemId())
                 .salesType(property.getSalesType())
                 .serviceType(property.getServiceType())
-                .image_thumbnail(property.getImage_thumbnail())
+                .images(property.getImages())
+                .imageThumbnail(property.getImageThumbnail())
                 .deposit(property.getDeposit())
                 .salePrice(property.getSalePrice())
                 .monthlyRentPrice(property.getMonthlyRentPrice())
                 .area(property.getArea())
-                .address(property.getAddress())
+                .roomType(property.getRoomType())
+                .title(property.getTitle())
+                .status(property.getStatus())
+                .description(property.getDescription())
+                .parking(property.getParking())
+                .elevator(property.getElevator())
+                .roomDirection(property.getRoomDirection())
+                .moveinDate(property.getMoveinDate())
+                .floor(property.getFloor())
+                .options(property.getOptions())
+                .manageCostInc(property.getManageCostInc())
+                .bathroomCount(property.getBathroomCount())
+                .residenceType(property.getResidenceType())
+                .manageCostNotInc(property.getManageCostNotInc())
+                .popular(property.getPopular())
+                .address(property.getAddress().getFullAddress())
+                .jibunAddress(property.getAddress().getJibunAddress())
                 .location(property.getLocation())
                 .agentTitle(property.getAgentTitle())
                 .agentPhone(property.getAgentPhone())
                 .manageCost(property.getManageCost())
-                .subway1(property.getSubway1())
-                .subway2(property.getSubway2())
-                .subway3(property.getSubway3())
+                .favorite(favorite)
+                .updateAt(property.getModifiedAt())
+                .subways(subways)
                 .build();
     }
 }
