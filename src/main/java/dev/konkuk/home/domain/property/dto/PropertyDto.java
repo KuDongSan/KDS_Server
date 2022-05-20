@@ -2,13 +2,14 @@ package dev.konkuk.home.domain.property.dto;
 
 import dev.konkuk.home.domain.property.constant.*;
 import dev.konkuk.home.domain.property.entity.Property;
+import io.swagger.annotations.ApiModel;
 import lombok.*;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@ApiModel(value = "매물 상세 화면 Dto")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Setter

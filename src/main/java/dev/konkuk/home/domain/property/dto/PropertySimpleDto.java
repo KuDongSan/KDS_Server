@@ -5,6 +5,7 @@ import dev.konkuk.home.domain.property.constant.SalesType;
 import dev.konkuk.home.domain.property.constant.ServiceType;
 import dev.konkuk.home.domain.property.constant.Subway;
 import dev.konkuk.home.domain.property.entity.Property;
+import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+@ApiModel(value = "매물 리스트 화면에 최적화된 Dto")
 @Getter @Setter
 public class PropertySimpleDto {
 
