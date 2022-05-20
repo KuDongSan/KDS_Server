@@ -4,7 +4,6 @@ import dev.konkuk.home.domain.account.entity.Account;
 import dev.konkuk.home.domain.account.repository.AccountRepository;
 import dev.konkuk.home.domain.property.dto.PropertyDto;
 import dev.konkuk.home.domain.property.dto.PropertySimpleDto;
-import dev.konkuk.home.domain.property.dto.SearchDto;
 import dev.konkuk.home.domain.property.entity.Property;
 import dev.konkuk.home.domain.property.repository.PropertyRepository;
 import lombok.RequiredArgsConstructor;
@@ -53,10 +52,10 @@ public class PropertyService {
     }
 
 
-    public List<PropertySimpleDto> getFilteredPropertyList(String addr, SearchDto searchDto) {
-        List<Property> properties = propertyRepository.findFilteredProPerty(addr, searchDto);
-
-        return properties.parallelStream().map(property ->
-                PropertySimpleDto.of(property)).collect(Collectors.toList());
-    }
+//    public List<PropertySimpleDto> getFilteredPropertyList(String addr, SearchDto searchDto) {
+//        List<Property> properties = propertyRepository.findFilteredProPerty(addr, searchDto);
+//
+//        return properties.parallelStream().map(property ->
+//                PropertySimpleDto.of(property)).collect(Collectors.toList());
+//    }
 }
