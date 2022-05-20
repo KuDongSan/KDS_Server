@@ -34,4 +34,9 @@ public class AccountService {
         return AccountDto.of(savedAccount);
     }
 
+    public Account findByEmail(String email) {
+        return accountRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("유저 조회 실패"));
+    }
+
 }
