@@ -30,7 +30,7 @@ public class CustomPropertyRepositoryImpl implements CustomPropertyRepository{
                 .where(qProperty.address.address2.eq(searchDto.getAddress())
                         .and(serviceTypeEquals(searchDto.getServiceType()))
                         .and(salesTypeEquals(searchDto.getSalesType()))
-                        .and(nearestDistance(searchDto.getNearstDistance()))
+                        .and(nearestDistance(searchDto.getNearestDistance()))
                         .and(betweenDeposit(searchDto.getUpperDeposit(), searchDto.getLowerDeposit()))
                         .and(betweenArea(searchDto.getUpperArea(), searchDto.getLowerArea())))
                 .fetch();
