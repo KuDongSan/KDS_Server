@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface CustomPropertyRepository {
 
-    List<Property> findFilteredProPerty(String addr, SearchDto searchDto);
+    List<Property> findFilteredProPerty(SearchDto searchDto);
 
 }

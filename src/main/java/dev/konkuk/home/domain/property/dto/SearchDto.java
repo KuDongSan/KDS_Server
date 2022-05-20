@@ -8,12 +8,29 @@ import lombok.Setter;
 @Getter @Setter
 public class SearchDto {
 
+    private String address;
+
     private SalesType salesType;
 
     private ServiceType serviceType;
 
-    private Double area;
+    /**
+     * upperArea < Area < lowerArea
+     */
+    private Double upperArea;
 
-//    private Long distance;
+    private Double lowerArea;
+
+    /**
+     * upperDeposit < Deposit < lowerDeposit
+     */
+    private Long upperDeposit;
+
+    private Long lowerDeposit;
+
+    /**
+     * ex. 지하철로부터 10분이내의 매물
+     */
+    private Long nearestDistance;
 
 }
