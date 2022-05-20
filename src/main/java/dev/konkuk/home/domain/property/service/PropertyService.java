@@ -58,4 +58,8 @@ public class PropertyService {
 //        return properties.parallelStream().map(property ->
 //                PropertySimpleDto.of(property)).collect(Collectors.toList());
 //    }
+
+    public Property getById(Long itemId) {
+        return propertyRepository.getById(itemId);
+    }
 }
