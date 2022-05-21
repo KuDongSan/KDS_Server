@@ -21,29 +21,26 @@ import java.util.stream.Collectors;
 public class PropertyService {
 
     private final PropertyRepository propertyRepository;
-    //TODO 위치 변경
-    private final AccountRepository accountRepository;
-
 
     public PropertyDto getProperty(Long propertyId) {
         Property property = propertyRepository.getById(propertyId);
         return PropertyDto.of(property, false);
     }
 
-    public List<PropertySimpleDto> getFavoritePropertyList(String email) {
-        Account account = accountRepository.findByEmail(email)
-                .orElseThrow(() -> new EntityNotFoundException(""));
-
-        List<PropertySimpleDto> properties = account.getProperties().stream()
-                .map(propertyId -> {
-                    Property property = propertyRepository.findById(propertyId)
-                            .orElseThrow(() -> new EntityNotFoundException(""));
-                    return PropertySimpleDto.of(property);
-
-                }).collect(Collectors.toList());
-
-        return properties;
-    }
+//    public List<PropertySimpleDto> getFavoritePropertyList(String email) {
+//        Account account = accountRepository.findByEmail(email)
+//                .orElseThrow(() -> new EntityNotFoundException(""));
+//
+//        List<PropertySimpleDto> properties = account.getProperties().stream()
+//                .map(propertyId -> {
+//                    Property property = propertyRepository.findById(propertyId)
+//                            .orElseThrow(() -> new EntityNotFoundException(""));
+//                    return PropertySimpleDto.of(property);
+//
+//                }).collect(Collectors.toList());
+//
+//        return properties;
+//    }
 
     public List<PropertySimpleDto> getPropertyList(String addr) {
         List<Property> properties = propertyRepository.findByAddress_Address2(addr);
@@ -63,6 +60,7 @@ public class PropertyService {
     }
 
     public Property getById(Long itemId) {
-        return propertyRepository.getById(itemId);
+        return propertyRepository.findById(itemId)
+                .orElseThrow(() -> new EntityNotFoundException("매물 조회 실패"));
     }
 }
