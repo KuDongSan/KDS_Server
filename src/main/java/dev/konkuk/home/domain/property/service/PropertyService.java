@@ -63,6 +63,7 @@ public class PropertyService {
     }
 
     public Property getById(Long itemId) {
-        return propertyRepository.getById(itemId);
+        return propertyRepository.findById(itemId)
+                .orElseThrow(()-> new EntityNotFoundException("매물 조회 실패"));
     }
 }

@@ -1,11 +1,13 @@
 package dev.konkuk.home.domain.account.api;
 
 import dev.konkuk.home.domain.account.dto.AccountDto;
+import dev.konkuk.home.domain.account.dto.RegisterPropertyDto;
 import dev.konkuk.home.domain.account.service.AccountService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "소셜 로그인 Controller")
@@ -24,6 +26,17 @@ public class AccountController {
             accountService.registerAccount(accountDto);
         }
         return accountService.getAccountDto(accountDto.getEmail());
+    }
+
+    @ApiOperation(value = "내 부동산 등록 API")
+    @PostMapping("/register")
+    public ResponseEntity<RegisterPropertyDto.Response> registerProperty(
+            @RequestParam String email,
+            @RequestBody RegisterPropertyDto.Request dto) {
+
+        RegisterPropertyDto.Response response = accountService.registerProperty(email, dto.getItemId());
+        return ResponseEntity.ok(response);
+
     }
 
 
