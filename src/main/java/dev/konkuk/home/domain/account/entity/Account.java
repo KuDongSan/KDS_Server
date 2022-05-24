@@ -1,6 +1,7 @@
 package dev.konkuk.home.domain.account.entity;
 
 import dev.konkuk.home.domain.base.BaseTimeEntity;
+import dev.konkuk.home.domain.property.entity.Property;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,12 +31,14 @@ public class Account extends BaseTimeEntity {
 
     private String imageThumbnail;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "account_properties",
-            joinColumns = @JoinColumn(name = "account_id")
-    )
-    private List<Long> properties = new ArrayList<>();
+
+
+//    @ElementCollection
+//    @CollectionTable(
+//            name = "account_properties",
+//            joinColumns = @JoinColumn(name = "account_id")
+//    )
+//    private List<Long> properties = new ArrayList<>();
 
     @Builder
     public Account(String name, String email, String imageThumbnail) {

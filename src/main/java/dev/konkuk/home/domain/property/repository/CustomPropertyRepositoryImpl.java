@@ -59,6 +59,6 @@ public class CustomPropertyRepositoryImpl implements CustomPropertyRepository{
     }
 
     private BooleanExpression betweenDeposit(Long upperDeposit, Long lowerDeposit) {
-        return QProperty.property.area.exclusiveArea.between(upperDeposit,lowerDeposit);
+        return QProperty.property.deposit.between(upperDeposit,lowerDeposit);
     }
 }

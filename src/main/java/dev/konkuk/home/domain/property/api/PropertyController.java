@@ -1,6 +1,5 @@
 package dev.konkuk.home.domain.property.api;
 
-import dev.konkuk.home.domain.account.repository.AccountRepository;
 import dev.konkuk.home.domain.property.dto.PropertyDto;
 import dev.konkuk.home.domain.property.dto.PropertySimpleDto;
 import dev.konkuk.home.domain.property.dto.SearchDto;

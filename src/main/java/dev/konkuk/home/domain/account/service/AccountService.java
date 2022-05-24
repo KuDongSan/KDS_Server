@@ -3,11 +3,13 @@ package dev.konkuk.home.domain.account.service;
 import dev.konkuk.home.domain.account.dto.AccountDto;
 import dev.konkuk.home.domain.account.entity.Account;
 import dev.konkuk.home.domain.account.repository.AccountRepository;
+import dev.konkuk.home.domain.property.service.PropertyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -15,6 +17,8 @@ import javax.persistence.EntityNotFoundException;
 public class AccountService {
 
     private final AccountRepository accountRepository;
+
+    private final PropertyService propertyService;
 
     public boolean isRegisteredAccount(String email) {
         return accountRepository.existsByEmail(email);
