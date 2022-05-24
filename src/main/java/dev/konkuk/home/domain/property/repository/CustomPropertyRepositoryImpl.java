@@ -1,6 +1,5 @@
 package dev.konkuk.home.domain.property.repository;
 
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import dev.konkuk.home.domain.property.constant.SalesType;
