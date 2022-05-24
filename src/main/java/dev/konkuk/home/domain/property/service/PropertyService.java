@@ -27,20 +27,6 @@ public class PropertyService {
         return PropertyDto.of(property, false);
     }
 
-//    public List<PropertySimpleDto> getFavoritePropertyList(String email) {
-//        Account account = accountRepository.findByEmail(email)
-//                .orElseThrow(() -> new EntityNotFoundException(""));
-//
-//        List<PropertySimpleDto> properties = account.getProperties().stream()
-//                .map(propertyId -> {
-//                    Property property = propertyRepository.findById(propertyId)
-//                            .orElseThrow(() -> new EntityNotFoundException(""));
-//                    return PropertySimpleDto.of(property);
-//
-//                }).collect(Collectors.toList());
-//
-//        return properties;
-//    }
 
     public List<PropertySimpleDto> getPropertyList(String addr) {
         List<Property> properties = propertyRepository.findByAddress_Address2(addr);
