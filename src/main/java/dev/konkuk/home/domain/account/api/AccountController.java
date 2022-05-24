@@ -3,12 +3,11 @@ package dev.konkuk.home.domain.account.api;
 import dev.konkuk.home.domain.account.dto.AccountDto;
 import dev.konkuk.home.domain.account.service.AccountService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-@Api(tags = "소셜 로그인 Controller")
+@Api(tags = "유저 Controller")
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
 @RestController
@@ -25,7 +24,6 @@ public class AccountController {
         }
         return accountService.getAccountDto(accountDto.getEmail());
     }
-
 
 
 }

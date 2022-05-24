@@ -24,6 +24,7 @@ public class FavoriteDto {
     @Getter @Setter
     @Builder
     public static class Response {
+
         private Long itemId;
         private SalesType salesType;
         private ServiceType serviceType;

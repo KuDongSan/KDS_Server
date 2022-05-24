@@ -1,8 +1,8 @@
 package dev.konkuk.home.domain.property.api;
 
-import dev.konkuk.home.domain.account.repository.AccountRepository;
 import dev.konkuk.home.domain.property.dto.PropertyDto;
 import dev.konkuk.home.domain.property.dto.PropertySimpleDto;
+import dev.konkuk.home.domain.property.dto.SearchDto;
 import dev.konkuk.home.domain.property.service.PropertyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -19,7 +19,6 @@ import java.util.List;
 public class PropertyController {
 
     private final PropertyService propertyService;
-    private final AccountRepository accountRepository;
 
     @ApiOperation(value = "지역구에 해당하는 전체 매물 반환하는 API")
     @ApiImplicitParam(name = "address", value = "지역구명", example = "송파구")
@@ -31,15 +30,15 @@ public class PropertyController {
         return ResponseEntity.ok(propertySimpleDtos);
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<PropertySimpleDto>> getPropertyList(
-//            @RequestParam("address") String address,
-//            SearchDto searchDto
-//    ) {
-//        List<PropertySimpleDto> propertySimpleDtos = propertyService.getFilteredPropertyList(address, searchDto);
-//
-//        return ResponseEntity.ok(propertySimpleDtos);
-//    }
+    @GetMapping("/filter")
+    public ResponseEntity<List<PropertySimpleDto>> getPropertyList(
+            SearchDto searchDto
+    ) {
+
+        List<PropertySimpleDto> propertySimpleDtos = propertyService.getFilteredPropertyList(searchDto);
+
+        return ResponseEntity.ok(propertySimpleDtos);
+    }
 
     @ApiOperation(value = "매물 상세 정보를 반환하는 API")
     @ApiImplicitParam(name = "propertyId", value = "매물 아이디", example = "1")

@@ -29,6 +29,7 @@ public class AccountDto {
                 .email(email)
                 .imageThumbnail(imageThumbnail)
                 .build();
+
     }
 
     public static AccountDto of(Account account) {

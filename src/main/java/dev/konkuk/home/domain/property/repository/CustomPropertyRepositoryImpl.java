@@ -1,5 +1,6 @@
 package dev.konkuk.home.domain.property.repository;
 
+import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import dev.konkuk.home.domain.property.constant.SalesType;
@@ -20,19 +21,29 @@ public class CustomPropertyRepositoryImpl implements CustomPropertyRepository{
     }
 
     @Override
-    public List<Property> findFilteredProPerty(String addr, SearchDto searchDto) {
+    public List<Property> findFilteredProPerty(SearchDto searchDto) {
         QProperty qProperty = QProperty.property;
 
         List<Property> properties = queryFactory
                 .select(qProperty)
                 .from(qProperty)
-                .where(qProperty.address.address2.eq(addr)
+                .where(qProperty.address.address2.eq(searchDto.getAddress())
                         .and(serviceTypeEquals(searchDto.getServiceType()))
                         .and(salesTypeEquals(searchDto.getSalesType()))
-                        .and(areaMoreThan(searchDto.getArea())))
+                        .and(nearestDistance(searchDto.getNearestDistance()))
+                        .and(betweenDeposit(searchDto.getUpperDeposit(), searchDto.getLowerDeposit()))
+                        .and(betweenArea(searchDto.getUpperArea(), searchDto.getLowerArea())))
                 .fetch();
 
         return properties;
+    }
+
+    private BooleanExpression nearestDistance(Long distance) {
+
+        return QProperty.property.subway1.distance.loe(distance * 60)
+                .or(QProperty.property.subway2.distance.loe(distance * 60))
+                .or(QProperty.property.subway3.distance.loe(distance * 60));
+
     }
 
     private BooleanExpression serviceTypeEquals(ServiceType serviceType) {
@@ -43,7 +54,11 @@ public class CustomPropertyRepositoryImpl implements CustomPropertyRepository{
         return QProperty.property.salesType.eq(salesType);
     }
 
-    private BooleanExpression areaMoreThan(Double area) {
-        return QProperty.property.area.exclusiveArea.gt(area);
+    private BooleanExpression betweenArea(Double upperArea, Double lowerArea) {
+        return QProperty.property.area.exclusiveArea.between(upperArea,lowerArea);
+    }
+
+    private BooleanExpression betweenDeposit(Long upperDeposit, Long lowerDeposit) {
+        return QProperty.property.deposit.between(upperDeposit,lowerDeposit);
     }
 }
