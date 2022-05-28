@@ -27,7 +27,7 @@ public class SearchDto {
     private Long upperDeposit;
 
     private Long lowerDeposit;
-
+    
     /**
      * ex. 지하철로부터 10분이내의 매물
      */

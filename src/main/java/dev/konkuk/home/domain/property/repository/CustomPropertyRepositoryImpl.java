@@ -12,7 +12,7 @@ import dev.konkuk.home.domain.property.entity.QProperty;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class CustomPropertyRepositoryImpl implements CustomPropertyRepository{
+public class CustomPropertyRepositoryImpl implements CustomPropertyRepository {
 
     private JPAQueryFactory queryFactory;
 
@@ -55,10 +55,12 @@ public class CustomPropertyRepositoryImpl implements CustomPropertyRepository{
     }
 
     private BooleanExpression betweenArea(Double upperArea, Double lowerArea) {
-        return QProperty.property.area.exclusiveArea.between(upperArea,lowerArea);
+        return QProperty.property.area.exclusiveArea.between(upperArea, lowerArea);
     }
 
     private BooleanExpression betweenDeposit(Long upperDeposit, Long lowerDeposit) {
-        return QProperty.property.deposit.between(upperDeposit,lowerDeposit);
+        return QProperty.property.deposit.between(upperDeposit, lowerDeposit);
     }
+
+
 }
