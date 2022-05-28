@@ -32,7 +32,8 @@ public class CustomPropertyRepositoryImpl implements CustomPropertyRepository {
                         .and(salesTypeEquals(searchDto.getSalesType()))
                         .and(nearestDistance(searchDto.getNearestDistance()))
                         .and(betweenDeposit(searchDto.getUpperDeposit(), searchDto.getLowerDeposit()))
-                        .and(betweenArea(searchDto.getUpperArea(), searchDto.getLowerArea())))
+                        .and(betweenArea(searchDto.getUpperArea(), searchDto.getLowerArea()))
+                        .and(betweenMonthlyRent(searchDto.getUpperMonthlyRent(), searchDto.getLowerMonthlyRent())))
                 .fetch();
 
         return properties;
@@ -62,5 +63,8 @@ public class CustomPropertyRepositoryImpl implements CustomPropertyRepository {
         return QProperty.property.deposit.between(upperDeposit, lowerDeposit);
     }
 
+    private BooleanExpression betweenMonthlyRent(Long upperMonthlyRent, Long lowerMonthlyRent) {
+        return QProperty.property.monthlyRentPrice.between(upperMonthlyRent, lowerMonthlyRent);
+    }
 
 }
