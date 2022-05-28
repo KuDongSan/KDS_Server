@@ -43,8 +43,8 @@ public class PropertyController {
     @ApiOperation(value = "매물 상세 정보를 반환하는 API")
     @ApiImplicitParam(name = "propertyId", value = "매물 아이디", example = "1")
     @GetMapping("/{propertyId}")
-    public ResponseEntity<PropertyDto> getProperty(@PathVariable Long propertyId) {
-        PropertyDto propertyDto = propertyService.getProperty(propertyId);
+    public ResponseEntity<PropertyDto> getProperty(@RequestParam String email, @PathVariable Long propertyId) {
+        PropertyDto propertyDto = propertyService.getProperty(email, propertyId);
         return ResponseEntity.ok(propertyDto);
     }
 

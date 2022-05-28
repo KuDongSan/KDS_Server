@@ -1,7 +1,8 @@
 package dev.konkuk.home.domain.property.service;
 
 import dev.konkuk.home.domain.account.entity.Account;
-import dev.konkuk.home.domain.account.repository.AccountRepository;
+import dev.konkuk.home.domain.account.service.AccountService;
+import dev.konkuk.home.domain.favorite.service.FavoriteService;
 import dev.konkuk.home.domain.property.dto.PropertyDto;
 import dev.konkuk.home.domain.property.dto.PropertySimpleDto;
 import dev.konkuk.home.domain.property.dto.SearchDto;
@@ -21,10 +22,14 @@ import java.util.stream.Collectors;
 public class PropertyService {
 
     private final PropertyRepository propertyRepository;
+    private final FavoriteService favoriteService;
+    private final AccountService accountService;
 
-    public PropertyDto getProperty(Long propertyId) {
+    public PropertyDto getProperty(String email, Long propertyId) {
+        Account account = accountService.findByEmail(email);
         Property property = propertyRepository.getById(propertyId);
-        return PropertyDto.of(property, false);
+        boolean isFavorite = favoriteService.isFavorite(account, property);
+        return PropertyDto.of(property, isFavorite);
     }
 
 

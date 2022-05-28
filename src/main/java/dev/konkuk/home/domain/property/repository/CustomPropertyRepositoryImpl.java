@@ -12,7 +12,7 @@ import dev.konkuk.home.domain.property.entity.QProperty;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class CustomPropertyRepositoryImpl implements CustomPropertyRepository{
+public class CustomPropertyRepositoryImpl implements CustomPropertyRepository {
 
     private JPAQueryFactory queryFactory;
 
@@ -32,7 +32,8 @@ public class CustomPropertyRepositoryImpl implements CustomPropertyRepository{
                         .and(salesTypeEquals(searchDto.getSalesType()))
                         .and(nearestDistance(searchDto.getNearestDistance()))
                         .and(betweenDeposit(searchDto.getUpperDeposit(), searchDto.getLowerDeposit()))
-                        .and(betweenArea(searchDto.getUpperArea(), searchDto.getLowerArea())))
+                        .and(betweenArea(searchDto.getUpperArea(), searchDto.getLowerArea()))
+                        .and(betweenMonthlyRent(searchDto.getUpperMonthlyRent(), searchDto.getLowerMonthlyRent())))
                 .fetch();
 
         return properties;
@@ -55,10 +56,15 @@ public class CustomPropertyRepositoryImpl implements CustomPropertyRepository{
     }
 
     private BooleanExpression betweenArea(Double upperArea, Double lowerArea) {
-        return QProperty.property.area.exclusiveArea.between(upperArea,lowerArea);
+        return QProperty.property.area.exclusiveArea.between(upperArea, lowerArea);
     }
 
     private BooleanExpression betweenDeposit(Long upperDeposit, Long lowerDeposit) {
-        return QProperty.property.deposit.between(upperDeposit,lowerDeposit);
+        return QProperty.property.deposit.between(upperDeposit, lowerDeposit);
     }
+
+    private BooleanExpression betweenMonthlyRent(Long upperMonthlyRent, Long lowerMonthlyRent) {
+        return QProperty.property.monthlyRentPrice.between(upperMonthlyRent, lowerMonthlyRent);
+    }
+
 }

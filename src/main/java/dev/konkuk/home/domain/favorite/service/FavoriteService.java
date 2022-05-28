@@ -21,7 +21,6 @@ public class FavoriteService {
 
     private final FavoriteRepository favoriteRepository;
     private final AccountService accountService;
-    private final PropertyService propertyService;
 
     public List<FavoriteDto.Response> getFavorites(String email) {
         Account account = accountService.findByEmail(email);
@@ -31,10 +30,7 @@ public class FavoriteService {
     }
 
     @Transactional
-    public void createFavorite(String email, Long itemId) {
-        Account account = accountService.findByEmail(email);
-        Property property = propertyService.getById(itemId);
-
+    public void createFavorite(Account account, Property property) {
         /* 이미 등록해놨을 경우 취소(삭제), 아닐 경우 관심 매물 등록 진행 */
         favoriteRepository.findByAccountAndProperty(account, property)
                 .ifPresentOrElse(favoriteRepository::delete,
@@ -43,6 +39,10 @@ public class FavoriteService {
                             favorite = Favorite.createFavorite(favorite);
                             favoriteRepository.save(favorite);
                         });
+    }
+
+    public boolean isFavorite(Account account, Property property) {
+        return favoriteRepository.findByAccountAndProperty(account, property).isPresent();
     }
 
 }
