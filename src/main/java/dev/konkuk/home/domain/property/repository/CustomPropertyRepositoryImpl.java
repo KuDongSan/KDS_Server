@@ -30,9 +30,15 @@ public class CustomPropertyRepositoryImpl implements CustomPropertyRepository {
                         .and(serviceTypeEquals(searchDto.getServiceType()))
                         .and(salesTypeEquals(searchDto.getSalesType()))
                         .and(nearestDistance(searchDto.getNearestDistance()))
-                        .and(betweenDeposit(searchDto.getUpperDeposit(), searchDto.getLowerDeposit()))
-                        .and(betweenArea(searchDto.getUpperArea(), searchDto.getLowerArea()))
-                        .and(betweenMonthlyRent(searchDto.getUpperMonthlyRent(), searchDto.getLowerMonthlyRent())))
+                        .and(betweenDeposit(
+                                searchDto.getUpperDeposit() == null ? null : searchDto.getUpperDeposit(),
+                                searchDto.getLowerDeposit() == null ? null : searchDto.getLowerDeposit()))
+                        .and(betweenArea(
+                                searchDto.getUpperArea() == null ? null : searchDto.getUpperArea(),
+                                searchDto.getLowerArea() == null ? null : searchDto.getLowerArea()))
+                        .and(betweenMonthlyRent(
+                                searchDto.getUpperMonthlyRent() == null ? null : searchDto.getUpperMonthlyRent(),
+                                searchDto.getLowerMonthlyRent() == null ? null : searchDto.getLowerMonthlyRent())))
                 .fetch();
 
         return properties;
@@ -59,10 +65,20 @@ public class CustomPropertyRepositoryImpl implements CustomPropertyRepository {
     }
 
     private BooleanExpression betweenDeposit(Long upperDeposit, Long lowerDeposit) {
+
+        if (upperDeposit == null && lowerDeposit == null) {
+            return null;
+        }
+
         return QProperty.property.deposit.between(upperDeposit, lowerDeposit);
     }
 
     private BooleanExpression betweenMonthlyRent(Long upperMonthlyRent, Long lowerMonthlyRent) {
+
+        if (upperMonthlyRent == null && lowerMonthlyRent == null) {
+            return null;
+        }
+
         return QProperty.property.monthlyRentPrice.between(upperMonthlyRent, lowerMonthlyRent);
     }
 

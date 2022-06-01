@@ -3,6 +3,7 @@ package dev.konkuk.home.domain.property.service;
 import dev.konkuk.home.domain.account.entity.Account;
 import dev.konkuk.home.domain.account.service.AccountService;
 import dev.konkuk.home.domain.favorite.service.FavoriteService;
+import dev.konkuk.home.domain.property.dto.PropertyCompareDto;
 import dev.konkuk.home.domain.property.dto.PropertyDto;
 import dev.konkuk.home.domain.property.dto.PropertySimpleDto;
 import dev.konkuk.home.domain.property.dto.SearchDto;
@@ -53,5 +54,20 @@ public class PropertyService {
     public Property getById(Long itemId) {
         return propertyRepository.findById(itemId)
                 .orElseThrow(() -> new EntityNotFoundException("매물 조회 실패"));
+    }
+
+    public List<PropertyCompareDto> getCompareProperty(Long p1, Long p2) {
+
+        List<Property> compareProperty = propertyRepository.findCompareProperty(p1, p2);
+
+        if (compareProperty.size() != 2) {
+            throw new EntityNotFoundException("매물 조회 실패");
+        }
+//        return null;
+
+        return compareProperty.stream().map(property ->
+                PropertyCompareDto.of(property)).collect(Collectors.toList());
+
+
     }
 }
