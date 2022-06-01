@@ -34,7 +34,7 @@ public class SearchDto {
     private Long upperMonthlyRent;
 
     private Long lowerMonthlyRent;
-    
+
     /**
      * ex. 지하철로부터 10분이내의 매물
      */
