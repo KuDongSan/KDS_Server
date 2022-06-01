@@ -21,6 +21,9 @@ public class CustomPropertyRepositoryImpl implements CustomPropertyRepository {
 
     @Override
     public List<Property> findFilteredProPerty(SearchDto searchDto) {
+
+        System.out.println(searchDto.getNearestDistance());
+
         QProperty qProperty = QProperty.property;
 
         List<Property> properties = queryFactory
@@ -29,7 +32,8 @@ public class CustomPropertyRepositoryImpl implements CustomPropertyRepository {
                 .where(qProperty.address.address2.eq(searchDto.getAddress())
                         .and(serviceTypeEquals(searchDto.getServiceType()))
                         .and(salesTypeEquals(searchDto.getSalesType()))
-                        .and(nearestDistance(searchDto.getNearestDistance()))
+                        .and(nearestDistance(
+                                searchDto.getNearestDistance() == null ? null : searchDto.getNearestDistance()))
                         .and(betweenDeposit(
                                 searchDto.getUpperDeposit() == null ? null : searchDto.getUpperDeposit(),
                                 searchDto.getLowerDeposit() == null ? null : searchDto.getLowerDeposit()))
@@ -45,6 +49,10 @@ public class CustomPropertyRepositoryImpl implements CustomPropertyRepository {
     }
 
     private BooleanExpression nearestDistance(Long distance) {
+
+        if (distance == null) {
+            return null;
+        }
 
         return QProperty.property.subway1.distance.loe(distance * 60)
                 .or(QProperty.property.subway2.distance.loe(distance * 60))
