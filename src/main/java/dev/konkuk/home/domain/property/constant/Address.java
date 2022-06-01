@@ -24,4 +24,9 @@ public class Address {
         return String.format("%s %s %s", this.address1, this.address2, this.address3);
     }
 
+    public String getMiddleAddress() {
+        return String.format("%s %s", this.address2, this.address3);
+
+    }
+
 }

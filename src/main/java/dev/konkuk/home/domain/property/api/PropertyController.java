@@ -1,5 +1,6 @@
 package dev.konkuk.home.domain.property.api;
 
+import dev.konkuk.home.domain.property.dto.PropertyCompareDto;
 import dev.konkuk.home.domain.property.dto.PropertyDto;
 import dev.konkuk.home.domain.property.dto.PropertySimpleDto;
 import dev.konkuk.home.domain.property.dto.SearchDto;
@@ -46,6 +47,16 @@ public class PropertyController {
     public ResponseEntity<PropertyDto> getProperty(@RequestParam String email, @PathVariable Long propertyId) {
         PropertyDto propertyDto = propertyService.getProperty(email, propertyId);
         return ResponseEntity.ok(propertyDto);
+    }
+
+    @GetMapping("/compare")
+    public ResponseEntity<List<PropertyCompareDto>> getCompare(
+            @RequestParam("p1") Long p1,
+            @RequestParam("p2") Long p2
+    ) {
+        List<PropertyCompareDto> propertyDtos = propertyService.getCompareProperty(p1, p2);
+
+        return ResponseEntity.ok(propertyDtos);
     }
 
 //    @ApiOperation(value = "매물 상세 정보를 반환하는 API")
