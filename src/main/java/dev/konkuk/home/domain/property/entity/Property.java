@@ -155,5 +155,8 @@ public class Property extends BaseTimeEntity {
         this.subway3 = subway3;
     }
 
+    public void updateSubway1(Subway subway1) {
+        this.subway1 = subway1;
+    }
 
 }
