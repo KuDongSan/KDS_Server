@@ -6,6 +6,8 @@ import dev.konkuk.home.domain.favorite.service.FavoriteService;
 import dev.konkuk.home.domain.property.dto.*;
 import dev.konkuk.home.domain.property.entity.Property;
 import dev.konkuk.home.domain.property.repository.PropertyRepository;
+import dev.konkuk.home.domain.subway.dto.SubwayDto;
+import dev.konkuk.home.domain.subway.service.SubwayService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +24,7 @@ public class PropertyService {
     private final PropertyRepository propertyRepository;
     private final FavoriteService favoriteService;
     private final AccountService accountService;
+    private final SubwayService subwayService;
 
     public PropertyDto getProperty(String email, Long propertyId) {
         Account account = accountService.findByEmail(email);
@@ -71,7 +74,17 @@ public class PropertyService {
     @Transactional
     public Long registerProperty(PropertyRegisterDto propertyRegisterDto) {
         Property propertyFromDto = propertyRegisterDto.toEntity();
+
+        //가까운 지하철역 계산 후 삽입
+        SubwayDto subwayDto = subwayService.findNearestSubway(
+                propertyRegisterDto.getLat(),
+                propertyRegisterDto.getLng()
+        );
+        subwayDto.toEmbeddable();
+        propertyFromDto.updateSubway1(subwayDto.toEmbeddable());
+
         Property savedProperty = propertyRepository.save(propertyFromDto);
+
         return savedProperty.getItemId();
     }
 
