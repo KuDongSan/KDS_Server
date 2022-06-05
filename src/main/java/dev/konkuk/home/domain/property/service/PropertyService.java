@@ -3,10 +3,7 @@ package dev.konkuk.home.domain.property.service;
 import dev.konkuk.home.domain.account.entity.Account;
 import dev.konkuk.home.domain.account.service.AccountService;
 import dev.konkuk.home.domain.favorite.service.FavoriteService;
-import dev.konkuk.home.domain.property.dto.PropertyCompareDto;
-import dev.konkuk.home.domain.property.dto.PropertyDto;
-import dev.konkuk.home.domain.property.dto.PropertySimpleDto;
-import dev.konkuk.home.domain.property.dto.SearchDto;
+import dev.konkuk.home.domain.property.dto.*;
 import dev.konkuk.home.domain.property.entity.Property;
 import dev.konkuk.home.domain.property.repository.PropertyRepository;
 import lombok.RequiredArgsConstructor;
@@ -70,4 +67,12 @@ public class PropertyService {
 
 
     }
+
+    @Transactional
+    public Long registerProperty(PropertyRegisterDto propertyRegisterDto) {
+        Property propertyFromDto = propertyRegisterDto.toEntity();
+        Property savedProperty = propertyRepository.save(propertyFromDto);
+        return savedProperty.getItemId();
+    }
+
 }

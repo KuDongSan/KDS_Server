@@ -29,4 +29,7 @@ public class Address {
 
     }
 
+    public Address(String address2) {
+        this.address2 = address2;
+    }
 }
