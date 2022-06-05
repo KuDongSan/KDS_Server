@@ -9,6 +9,7 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor
 @Embeddable
 @ToString
+@Builder
 public class Subway {
 
     private String name;

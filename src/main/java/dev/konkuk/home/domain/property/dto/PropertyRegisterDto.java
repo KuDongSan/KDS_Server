@@ -15,7 +15,7 @@ public class PropertyRegisterDto {
 
     private String imageThumbnail;
 
-    private String address;
+    private Address address;
 
     private Double area;
 
@@ -31,11 +31,15 @@ public class PropertyRegisterDto {
 
     private Long monthlyRentPrice;
 
-    private Subway subway;
+    private Location location;
+
+    private Double lat;
+
+    private Double lng;
 
     @Builder
     public PropertyRegisterDto(String imageThumbnail,
-                               String address,
+                               Address address,
                                Double area,
                                Double manageCost,
                                RoomType roomType,
@@ -43,7 +47,8 @@ public class PropertyRegisterDto {
                                ServiceType serviceType,
                                Long deposit,
                                Long monthlyRentPrice,
-                               Subway subway) {
+                               Double lat,
+                               Double lng) {
         this.imageThumbnail = imageThumbnail;
         this.address = address;
         this.area = area;
@@ -53,7 +58,8 @@ public class PropertyRegisterDto {
         this.serviceType = serviceType;
         this.deposit = deposit;
         this.monthlyRentPrice = monthlyRentPrice;
-        this.subway = subway;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     public Property toEntity() {
@@ -63,11 +69,11 @@ public class PropertyRegisterDto {
                 .roomType(roomType)
                 .imageThumbnail(imageThumbnail)
                 .area(new Area(area))
-                .address(new Address(address))
+                .address(address)
                 .deposit(deposit)
                 .manageCost(manageCost)
                 .monthlyRentPrice(monthlyRentPrice)
-                .subway1(subway)
+                .location(new Location(lat,lng))
                 .build();
     }
 
