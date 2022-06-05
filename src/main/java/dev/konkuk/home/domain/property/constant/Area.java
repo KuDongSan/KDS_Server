@@ -19,6 +19,8 @@ public class Area {
 
     private Double supplyArea;
 
-
+    public Area(Double exclusiveArea) {
+        this.exclusiveArea = exclusiveArea;
+    }
 
 }

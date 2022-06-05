@@ -1,9 +1,6 @@
 package dev.konkuk.home.domain.property.api;
 
-import dev.konkuk.home.domain.property.dto.PropertyCompareDto;
-import dev.konkuk.home.domain.property.dto.PropertyDto;
-import dev.konkuk.home.domain.property.dto.PropertySimpleDto;
-import dev.konkuk.home.domain.property.dto.SearchDto;
+import dev.konkuk.home.domain.property.dto.*;
 import dev.konkuk.home.domain.property.service.PropertyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -75,6 +72,11 @@ public class PropertyController {
 //
 //    }
 
-
+    @ApiOperation(value = "내 집 등록하기 API")
+    @PostMapping
+    public ResponseEntity<Long> propertyRegister(@RequestBody PropertyRegisterDto propertyRegisterDto) {
+        Long itemId = propertyService.registerProperty(propertyRegisterDto);
+        return ResponseEntity.ok(itemId);
+    }
 
 }
