@@ -13,6 +13,10 @@ import lombok.Setter;
 @Setter
 public class PropertyRegisterDto {
 
+    private String title;
+
+    private String description;
+
     private String imageThumbnail;
 
     private Address address;
@@ -38,7 +42,9 @@ public class PropertyRegisterDto {
     private Double lng;
 
     @Builder
-    public PropertyRegisterDto(String imageThumbnail,
+    public PropertyRegisterDto(String title,
+                               String description,
+                               String imageThumbnail,
                                Address address,
                                Double area,
                                Double manageCost,
@@ -49,6 +55,8 @@ public class PropertyRegisterDto {
                                Long monthlyRentPrice,
                                Double lat,
                                Double lng) {
+        this.title = title;
+        this.description = description;
         this.imageThumbnail = imageThumbnail;
         this.address = address;
         this.area = area;
@@ -64,6 +72,8 @@ public class PropertyRegisterDto {
 
     public Property toEntity() {
         return Property.builder()
+                .title(title)
+                .description(description)
                 .salesType(salesType)
                 .serviceType(serviceType)
                 .roomType(roomType)
@@ -73,7 +83,7 @@ public class PropertyRegisterDto {
                 .deposit(deposit)
                 .manageCost(manageCost)
                 .monthlyRentPrice(monthlyRentPrice)
-                .location(new Location(lat,lng))
+                .location(new Location(lat, lng))
                 .build();
     }
 
